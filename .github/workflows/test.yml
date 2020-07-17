@@ -6,15 +6,17 @@ on:
       - 'github-actions-test-lint'
 
 jobs:
-  eslint:
+  lint:
     name: check_eslint_error
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
     steps:
       - uses: actions/checkout@v2
-      - name: eslint
-        uses: reviewdog/action-eslint@v1
+      - name: run lint
+        uses: actions/setup-node@v1
         with:
-          github_token: ${{ secrets.github_token }}
-          reporter: github-pr-review # Change reporter.
-          eslint_flags: 'src/**/*.{vue,ts,js}'
-
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - run: npm run lint
