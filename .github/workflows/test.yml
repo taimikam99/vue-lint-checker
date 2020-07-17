@@ -10,11 +10,14 @@ jobs:
     name: check_eslint_error
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+      - name: npm install
+        run: npm install
       - name: eslint
         uses: reviewdog/action-eslint@v1
         with:
           github_token: ${{ secrets.github_token }}
           reporter: github-pr-review # Change reporter.
           eslint_flags: 'src/**/*.{vue,ts,js}'
-
+      - name: npm run lint
+        run: npm run lint
