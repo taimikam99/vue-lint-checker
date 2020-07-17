@@ -3,7 +3,7 @@ name: lint checker
 on:
   push:
     branches:
-      - 'github-actions-test'
+      - 'github-actions-test-lint'
 
 jobs:
   eslint:
